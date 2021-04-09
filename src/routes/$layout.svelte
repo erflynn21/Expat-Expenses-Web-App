@@ -3,7 +3,8 @@
   import {userStore} from '../stores/userStore';
 	import {browser} from '$app/env';
   import Auth from "$lib/components/auth.svelte";
-import Nav from "$lib/components/nav.svelte";
+  import Nav from "$lib/components/nav.svelte";
+  import {signOut} from "$lib/ts/auth";
   let profileDropdownOpen = false;
 
 	if (browser) {
@@ -26,14 +27,9 @@ import Nav from "$lib/components/nav.svelte";
         .catch((e) => console.log(e));
 	}
 
-  function logOut () {
+  const logOut = () => {
     profileDropdownOpen = false;
-    // @ts-ignore
-    const userbase = window.userbase;
-    userbase.signOut().then(() => {
-      userStore.set(undefined)
-    })
-    .catch((e) => console.log(e));
+    signOut();
   }
 </script>
 
@@ -98,15 +94,15 @@ import Nav from "$lib/components/nav.svelte";
                 </div>
 
                 <!--
-				Dropdown menu, show/hide based on menu state.
+                Dropdown menu, show/hide based on menu state.
 
-				Entering: "transition ease-out duration-100"
-					From: "transform opacity-0 scale-95"
-					To: "transform opacity-100 scale-100"
-				Leaving: "transition ease-in duration-75"
-					From: "transform opacity-100 scale-100"
-					To: "transform opacity-0 scale-95"
-				-->
+                Entering: "transition ease-out duration-100"
+                  From: "transform opacity-0 scale-95"
+                  To: "transform opacity-100 scale-100"
+                Leaving: "transition ease-in duration-75"
+                  From: "transform opacity-100 scale-100"
+                  To: "transform opacity-0 scale-95"
+                -->
                 {#if profileDropdownOpen === true}
                   <div
                     class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"

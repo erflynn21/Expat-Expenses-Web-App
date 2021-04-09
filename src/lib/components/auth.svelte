@@ -1,6 +1,5 @@
 <script lang='ts'>
-    import {browser} from '$app/env';
-    import { userStore } from '../../stores/userStore';
+    import { signIn } from '$lib/ts/auth';
 
     interface User {
         username: string,
@@ -11,19 +10,6 @@
         username: '',
         password: '',
     }
-
-    // @ts-ignore
-    const userbase = window.userbase;
-
-    const signIn = () => {
-        userbase.signIn({
-            username: user.username,
-            password: user.password,
-        }).then((user) => {
-            userStore.set(user);
-        })
-    }
-
 </script>
 
 <div class="min-h-screen bg-white flex">
@@ -79,7 +65,7 @@
             </div>
 
             <div>
-              <button type="submit" on:click|preventDefault={signIn} class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none">
+              <button type="submit" on:click|preventDefault={() => signIn(user)} class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none">
                 Sign in
               </button>
             </div>
