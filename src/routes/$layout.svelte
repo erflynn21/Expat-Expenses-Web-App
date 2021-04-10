@@ -1,11 +1,12 @@
 <script lang="ts">
   import "../global.css";
-  import {userStore} from '../lib/stores/userStore';
+  import {initialized, userStore} from '../lib/stores/userStore';
 	import {browser} from '$app/env';
   import Auth from "$lib/components/auth.svelte";
   import Nav from "$lib/components/nav.svelte";
   import {signOut} from "$lib/ts/auth";
   import { openDatabases } from "$lib/ts/openDatabases";
+import Loading from "$lib/components/loading.svelte";
   let profileDropdownOpen = false;
 
 	if (browser) {
@@ -26,7 +27,11 @@
 					}
 					
 				})
-        .catch((e) => console.log(e));
+        .catch((e) => console.log(e))
+        .finally(() => {
+          initialized.set(true);
+        })
+        ;
 	}
 
   const logOut = () => {
@@ -35,7 +40,9 @@
   }
 </script>
 
-{#if $userStore === undefined}
+{#if $initialized === false}
+  <Loading />
+{:else if $userStore === undefined}
   <Auth />
 {:else}
   <div class="h-screen flex overflow-hidden bg-gray-100">
@@ -53,13 +60,13 @@
                   type="button"
                   class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                 >
-                  Add money
+                  Add Expense
                 </button>
                 <button
                   type="button"
                   class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                 >
-                  Send money
+                  Add Income
                 </button>
               </div>
               <div class="ml-3 relative">
