@@ -1,4 +1,4 @@
-import {userStore} from '../../stores/userStore';
+import {userStore} from '$lib/stores/userStore'
 
 const signIn = (user) => {
     // @ts-ignore

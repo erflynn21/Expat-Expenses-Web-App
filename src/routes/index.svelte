@@ -1,9 +1,10 @@
 <script lang='ts'>
+	import { selectedMonthName, selectedYear } from "$lib/stores/datesStore";
 </script>
 
 <div class="mt-8">
 	<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-		<h2 class="text-lg leading-6 font-medium text-gray-900">Overview - Current Month, Current Year</h2>
+		<h2 class="text-lg leading-6 font-medium text-gray-900">Overview - {$selectedMonthName}, {$selectedYear}</h2>
 		<div class="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 			<!-- Card -->
 			<div class="bg-white overflow-hidden shadow rounded-lg">

@@ -1,10 +1,11 @@
 <script lang="ts">
   import "../global.css";
-  import {userStore} from '../stores/userStore';
+  import {userStore} from '../lib/stores/userStore';
 	import {browser} from '$app/env';
   import Auth from "$lib/components/auth.svelte";
   import Nav from "$lib/components/nav.svelte";
   import {signOut} from "$lib/ts/auth";
+  import { openDatabases } from "$lib/ts/openDatabases";
   let profileDropdownOpen = false;
 
 	if (browser) {
@@ -16,6 +17,7 @@
 					}
 			
 					if (user) {
+              openDatabases();
 					    userStore.set(user);
 					}
 
