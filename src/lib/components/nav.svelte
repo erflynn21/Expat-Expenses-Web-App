@@ -1,5 +1,5 @@
-<script lang='ts'>
-    let current:string = 'overview';
+<script lang="ts">
+  let current: string = "overview";
 </script>
 
 <!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
@@ -319,10 +319,10 @@
           <!-- Current: "bg-green-800 text-white", Default: "text-green-100 hover:text-white hover:bg-green-600" -->
           <a
             href="/"
-            on:click={() => current = 'overview'}
+            on:click={() => (current = "overview")}
             class="{current === 'overview'
-                    ? 'bg-green-800 text-white'
-                    : 'text-green-100 hover:text-white hover:bg-green-600'} group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md"
+              ? 'bg-green-800 text-white'
+              : 'text-green-100 hover:text-white hover:bg-green-600'} group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md"
           >
             <svg
               class="mr-4 text-green-200 w-6 h-6"
@@ -348,10 +348,10 @@
 
           <a
             href="/budget"
-            on:click={() => current = 'budget'}
+            on:click={() => (current = "budget")}
             class="{current === 'budget'
-                    ? 'bg-green-800 text-white'
-                    : 'text-green-100 hover:text-white hover:bg-green-600'} group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md"
+              ? 'bg-green-800 text-white'
+              : 'text-green-100 hover:text-white hover:bg-green-600'} group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md"
           >
             <svg
               class="mr-4 text-green-200 w-6 h-6"
@@ -372,10 +372,10 @@
 
           <a
             href="/transactions"
-            on:click={() => current = 'transactions'}
+            on:click={() => (current = "transactions")}
             class="{current === 'transactions'
-                    ? 'bg-green-800 text-white'
-                    : 'text-green-100 hover:text-white hover:bg-green-600'} group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md"
+              ? 'bg-green-800 text-white'
+              : 'text-green-100 hover:text-white hover:bg-green-600'} group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md"
           >
             <svg
               class="mr-4 text-green-200 w-6 h-6"
@@ -394,7 +394,7 @@
             Transactions
           </a>
         </div>
-        <div class="mt-6 pt-6">
+        <!-- <div class="mt-6 pt-6">
           <div class="px-2 space-y-1">
             <a
               href="/settings"
@@ -426,14 +426,14 @@
               </svg>
               Settings
             </a>
-            <!-- <a href="/" class="group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md text-green-100 hover:text-white hover:bg-green-600">
+            <a href="/" class="group flex items-center px-2 py-2 text-sm leading-6 font-medium rounded-md text-green-100 hover:text-white hover:bg-green-600">
                   <svg class="mr-4 h-6 w-6 text-green-200" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                   </svg>
                   Privacy
-                </a> -->
+                </a>
           </div>
-        </div>
+        </div> -->
       </nav>
     </div>
   </div>
