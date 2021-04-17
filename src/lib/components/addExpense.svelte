@@ -21,12 +21,16 @@
   let expense: Expense = {
     title: "",
     amount: null,
-    category: $categories[0],
+    category: null,
     date: $calendarDate,
     currency: $baseCurrency,
     originalAmount: null,
     originalCurrency: null,
   };
+
+  $: if ($categories) {
+    expense.category = $categories[0];
+  }
 
   const add = async () => {
     if (expense.title === null || expense.amount === null) {
@@ -35,19 +39,16 @@
     }
 
     if (expense.currency !== $baseCurrency) {
-      // console.log(expense);
-      await convert(expense).then((item) => {
-        console.log(item);
-      });
+      await convert(expense);
     }
 
-    // await addExpense(expense).then((e) => {
-    //   if (e) {
-    //     console.log(e);
-    //   } else {
-    //     clearForm();
-    //   }
-    // });
+    await addExpense(expense).then((e) => {
+      if (e) {
+        console.log(e);
+      } else {
+        clearForm();
+      }
+    });
   };
 
   const clearForm = () => {
