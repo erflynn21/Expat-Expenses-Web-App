@@ -12,7 +12,7 @@
     // @ts-ignore
     const userbase = window.userbase;
     userbase
-      .init({ appId: "9c589a73-c7d7-435e-9657-336c0347609f" })
+      .init({ appId: import.meta.env.VITE_USERBASE_API_KEY })
       .then(({ user }) => {
         if (user === undefined) {
           return;

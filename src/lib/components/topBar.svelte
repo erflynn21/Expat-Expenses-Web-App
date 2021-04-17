@@ -4,7 +4,7 @@
   import AddExpense from "./addExpense.svelte";
 
   let profileDropdownOpen: boolean = false;
-  let addModal: boolean = true;
+  let addModal: boolean = false;
 
   const logOut = () => {
     profileDropdownOpen = false;
