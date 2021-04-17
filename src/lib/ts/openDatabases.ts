@@ -6,6 +6,7 @@ import { openMonthlyBudgetsDatabase } from "./monthlyBudgets";
 import { openMonthlyExpensesDatabase } from "./monthlyExpenses";
 import { openMonthlyIncomesDatabase } from "./monthlyIncomes";
 import {allDatabases} from '$lib/stores/userStore';
+import { userbase } from "$lib/stores/userbaseStore";
 // import {get} from 'svelte/store'
 
 const openDatabases = () => {
@@ -27,8 +28,6 @@ const openDatabases = () => {
 }
 
 const getAllDatabases = () => {
-    // @ts-ignore
-    const userbase = window.userbase;
     userbase.getDatabases().then((databases) => {
         allDatabases.set(databases);
         // console.log(get(allDatabases));

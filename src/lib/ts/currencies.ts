@@ -1,12 +1,11 @@
 import {get} from 'svelte/store';
 import {currencies, baseCurrency, currencyOptions, baseCurrencySymbol, allCurrencies} from '$lib/stores/currenciesStore';
 import {currencyDict} from '$lib/stores/dictionariesStore';
+import { userbase } from '$lib/stores/userbaseStore';
 
 const databaseName = 'currencies';
 
 const openCurrenciesDatabase = () => {
-    // @ts-ignore
-    const userbase = window.userbase;
     userbase.openDatabase({ databaseName, changeHandler: function (items) {
         currencies.set(items);
         setCurrencies();
@@ -33,8 +32,6 @@ const setCurrencies = () => {
 }
 
 const addCurrencies = (currencies) => {
-    // @ts-ignore
-    const userbase = window.userbase;
     try {
         return userbase.insertItem({ databaseName, item: currencies }).then(() => {
             setCurrencies();
@@ -46,8 +43,6 @@ const addCurrencies = (currencies) => {
 };
 
 const updateCurrencies = async (updatedCurrencies, updatedCurrenciesId) => {
-    // @ts-ignore
-    const userbase = window.userbase;
     try {
         return userbase.updateItem({ databaseName, item: updatedCurrencies, itemId: updatedCurrenciesId }).then(() => {
             setCurrencies();

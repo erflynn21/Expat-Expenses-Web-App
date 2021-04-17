@@ -5,13 +5,11 @@ import { currentDate, selectedMonth, selectedYear } from '$lib/stores/datesStore
 import { baseCurrency } from '$lib/stores/currenciesStore';
 import { convert } from './convert';
 import { addIncome } from './incomes';
+import { userbase } from '$lib/stores/userbaseStore';
 
 const databaseName = `monthlyIncomes`;
 
 const openMonthlyIncomesDatabase = () => {
-    // @ts-ignore
-    const userbase = window.userbase;
-
     userbase.openDatabase({ databaseName, changeHandler: function (items) {
         monthlyIncomes.set(items);
 
@@ -59,8 +57,6 @@ const checkRecurringIncomes = async (monthlyIncomes) => {
 };
 
 const addMonthlyIncome = (monthlyIncome) => {
-    // @ts-ignore
-    const userbase = window.userbase;
     try {
         return userbase.insertItem({ databaseName, item: monthlyIncome });
     } catch (e) {
@@ -69,8 +65,6 @@ const addMonthlyIncome = (monthlyIncome) => {
 };
 
 const updateMonthlyIncome = (monthlyIncome, monthlyIncomeId) => {
-    // @ts-ignore
-    const userbase = window.userbase;
     try {
         return userbase.updateItem({ databaseName, item: monthlyIncome, itemId: monthlyIncomeId });
     } catch (e) {
@@ -79,8 +73,6 @@ const updateMonthlyIncome = (monthlyIncome, monthlyIncomeId) => {
 };
 
 const deleteMonthlyIncome = (monthlyIncomeId) => {
-    // @ts-ignore
-    const userbase = window.userbase;
     try {
         return userbase.deleteItem({ databaseName, itemId: monthlyIncomeId });
     } catch (e) {
@@ -88,4 +80,4 @@ const deleteMonthlyIncome = (monthlyIncomeId) => {
     }
 }
 
-export {openMonthlyIncomesDatabase}
+export {openMonthlyIncomesDatabase, addMonthlyIncome, updateMonthlyIncome, deleteMonthlyIncome}

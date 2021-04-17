@@ -5,12 +5,11 @@ import { currentDate, selectedMonth, selectedYear } from '$lib/stores/datesStore
 import { convert } from './convert';
 import { baseCurrency } from '$lib/stores/currenciesStore';
 import { addExpense } from './expenses';
+import { userbase } from '$lib/stores/userbaseStore';
 
 const databaseName = 'monthlyExpenses'
 
 const openMonthlyExpensesDatabase = () => {
-    // @ts-ignore
-    const userbase = window.userbase;
     userbase.openDatabase({ databaseName, changeHandler: function (items) {
         monthlyExpenses.set(items);
 
@@ -58,8 +57,6 @@ const checkRecurringExpenses = async (monthlyExpenses) => {
 };
 
 const addMonthlyExpense = (monthlyExpense) => {
-    // @ts-ignore
-    const userbase = window.userbase;
     try {
         return userbase.insertItem({ databaseName, item: monthlyExpense });
     } catch (e) {
@@ -68,8 +65,6 @@ const addMonthlyExpense = (monthlyExpense) => {
 };
 
 const updateMonthlyExpense = (monthlyExpense, monthlyExpenseId) => {
-    // @ts-ignore
-    const userbase = window.userbase;
     try {
         return userbase.updateItem({ databaseName, item: monthlyExpense, itemId: monthlyExpenseId });
     } catch (e) {
@@ -78,8 +73,6 @@ const updateMonthlyExpense = (monthlyExpense, monthlyExpenseId) => {
 };
 
 const deleteMonthlyExpense = (monthlyExpenseId) => {
-    // @ts-ignore
-    const userbase = window.userbase;
     try {
         return userbase.deleteItem({ databaseName, itemId: monthlyExpenseId });
     } catch (e) {

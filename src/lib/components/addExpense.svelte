@@ -2,6 +2,8 @@
   import { categories } from "$lib/stores/budgetsStore";
   import { allCurrencies, baseCurrency } from "$lib/stores/currenciesStore";
   import { calendarDate } from "$lib/stores/datesStore";
+  import { convert } from "$lib/ts/convert";
+  import { addExpense } from "$lib/ts/expenses";
 
   import { createEventDispatcher } from "svelte";
   const dispatch = createEventDispatcher();
@@ -26,8 +28,34 @@
     originalCurrency: null,
   };
 
-  const add = () => {
-    console.log(expense);
+  const add = async () => {
+    if (expense.title === null || expense.amount === null) {
+      console.log("missing something");
+      return;
+    }
+
+    if (expense.currency !== $baseCurrency) {
+      // console.log(expense);
+      await convert(expense).then((item) => {
+        console.log(item);
+      });
+    }
+
+    // await addExpense(expense).then((e) => {
+    //   if (e) {
+    //     console.log(e);
+    //   } else {
+    //     clearForm();
+    //   }
+    // });
+  };
+
+  const clearForm = () => {
+    expense.title = "";
+    expense.amount = null;
+    expense.currency = $baseCurrency;
+    expense.originalCurrency = null;
+    expense.originalAmount = null;
   };
 </script>
 

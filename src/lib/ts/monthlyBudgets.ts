@@ -1,9 +1,8 @@
 import {get} from 'svelte/store';
 import {monthlyBudgets, monthlyBudgetsDatabaseName, monthlyBudgetsSum} from '$lib/stores/monthlyBudgetsStore';
+import { userbase } from '$lib/stores/userbaseStore';
 
 const openMonthlyBudgetsDatabase = () => {
-    // @ts-ignore
-    const userbase = window.userbase;
     return userbase.openDatabase({ databaseName: get(monthlyBudgetsDatabaseName), changeHandler: function (items) {
         monthlyBudgets.set(items);
         // sets the monthly budgets total
@@ -21,8 +20,6 @@ const openMonthlyBudgetsDatabase = () => {
 }
 
 const addMonthlyBudget = (monthlyBudget) => {
-    // @ts-ignore
-    const userbase = window.userbase;
     try {
         return userbase.insertItem({ databaseName: get(monthlyBudgetsDatabaseName), item: monthlyBudget });
     } catch (e) {
@@ -31,8 +28,6 @@ const addMonthlyBudget = (monthlyBudget) => {
 };
 
 const updateMonthlyBudget = (monthlyBudget, monthlyBudgetId) => {
-    // @ts-ignore
-    const userbase = window.userbase;
     try {
         return userbase.updateItem({ databaseName: get(monthlyBudgetsDatabaseName), item: monthlyBudget, itemId: monthlyBudgetId });
     } catch (e) {
@@ -41,8 +36,6 @@ const updateMonthlyBudget = (monthlyBudget, monthlyBudgetId) => {
 };
 
 const deleteMonthlyBudget = (monthlyBudgetId) => {
-    // @ts-ignore
-    const userbase = window.userbase;
     try {
         return userbase.deleteItem({ databaseName: get(monthlyBudgetsDatabaseName), itemId: monthlyBudgetId });
     } catch (e) {

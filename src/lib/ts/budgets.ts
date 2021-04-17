@@ -4,12 +4,11 @@ import {monthlyBudgets} from '$lib/stores/monthlyBudgetsStore';
 import {baseCurrency} from '$lib/stores/currenciesStore';
 import { convert } from './convert';
 import { addMonthlyBudget } from './monthlyBudgets';
+import { userbase } from '$lib/stores/userbaseStore';
 
 const databaseName = 'budgets'
 
 const openBudgetsDatabase = () => {
-    // @ts-ignore
-    const userbase = window.userbase;
     userbase.openDatabase({ databaseName, changeHandler: function (items) {
         budgets.set(items);
 
@@ -65,8 +64,6 @@ const setMonthlyBudgets = async (budgets) => {
 }
 
 const addBudget = (budget) => {
-    // @ts-ignore
-    const userbase = window.userbase;
     try {
         return userbase.insertItem({ databaseName, item: budget });
     } catch (e) {
@@ -75,8 +72,6 @@ const addBudget = (budget) => {
 };
 
 const updateBudget = (budget, budgetId) => {
-    // @ts-ignore
-    const userbase = window.userbase;
     try {
         return userbase.updateItem({ databaseName, item: budget, itemId: budgetId });
     } catch (e) {
@@ -85,8 +80,6 @@ const updateBudget = (budget, budgetId) => {
 };
 
 const deleteBudget = (budgetId) => {
-    // @ts-ignore
-    const userbase = window.userbase;
     try {
         return userbase.deleteItem({ databaseName, itemId: budgetId });
     } catch (e) {

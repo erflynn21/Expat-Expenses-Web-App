@@ -1,10 +1,9 @@
 import {get} from 'svelte/store'
 import {allIncomes, incomes, incomesDatabaseName, incomesSum} from '$lib/stores/incomesStore'
 import { selectedMonth, selectedYear } from '$lib/stores/datesStore';
+import { userbase } from '$lib/stores/userbaseStore';
 
 const openIncomesDatabase = () => {
-    // @ts-ignore
-    const userbase = window.userbase;
     try {
         return userbase.openDatabase({ databaseName: get(incomesDatabaseName), changeHandler: function (items) {
             allIncomes.set(items);
@@ -53,8 +52,6 @@ const setIncomes = (items) => {
 }
 
 const addIncome = (income) => {
-    // @ts-ignore
-    const userbase = window.userbase;
     try {
         return userbase.insertItem({ databaseName: get(incomesDatabaseName), item: income });
     } catch (e) {
@@ -63,8 +60,6 @@ const addIncome = (income) => {
 };
 
 const updateIncome = (income, incomeId) => {
-    // @ts-ignore
-    const userbase = window.userbase;
     try {
        return userbase.updateItem({ databaseName: get(incomesDatabaseName), item: income, itemId: incomeId }); 
     } catch (e) {
@@ -73,8 +68,6 @@ const updateIncome = (income, incomeId) => {
 };
 
 const deleteIncome = (incomeId) => {
-    // @ts-ignore
-    const userbase = window.userbase;
     try {
         return userbase.deleteItem({ databaseName: get(incomesDatabaseName), itemId: incomeId });
     } catch (e) {
