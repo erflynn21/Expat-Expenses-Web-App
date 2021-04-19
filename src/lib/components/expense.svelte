@@ -4,20 +4,36 @@
   import { baseCurrencySymbol } from "$lib/stores/currenciesStore";
   import { deleteExpense } from "$lib/ts/expenses";
   import DeleteModal from "./deleteModal.svelte";
+  import EditExpense from "./editExpense.svelte";
   let dropdownOpen: boolean = false;
   let deleteModal: boolean = false;
+  let editExpense: boolean = false;
 
   const handleDelete = () => {
     deleteExpense(itemId);
     deleteModal = false;
   };
+
+  const openEditModal = () => {
+    editExpense = true;
+    dropdownOpen = false;
+  };
+
+  const openDeleteModal = () => {
+    deleteModal = true;
+    dropdownOpen = false;
+  };
+
+  let date = new Date(item.date).toLocaleDateString("en-US", {
+    month: "long",
+    day: "2-digit",
+  });
 </script>
 
 <tr class="bg-white">
   <td class="max-w-0 w-full px-6 py-4 whitespace-nowrap text-sm text-gray-900">
     <div class="flex">
       <a href="/" class="group inline-flex space-x-2 truncate text-sm">
-        <!-- Heroicon name: solid/cash -->
         <svg
           class="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500"
           xmlns="http://www.w3.org/2000/svg"
@@ -52,21 +68,20 @@
     </span>
   </td>
   <td class="pl-6 py-4 text-right whitespace-nowrap text-sm text-gray-500">
-    <time datetime={item.date}>{item.date}</time>
+    <time datetime={date}>{date}</time>
   </td>
   <td class="px-4 text-right whitespace-nowrap text-sm text-gray-500">
     <div class="relative inline-block text-left">
       <div>
         <button
           type="button"
-          class="bg-gray-100 rounded-full flex items-center text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
+          class="flex items-center text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500"
           id="menu-button"
           aria-expanded="true"
           aria-haspopup="true"
           on:click={() => (dropdownOpen = !dropdownOpen)}
         >
           <span class="sr-only">Open options</span>
-          <!-- Heroicon name: solid/dots-vertical -->
           <svg
             class="h-5 w-5"
             xmlns="http://www.w3.org/2000/svg"
@@ -107,6 +122,7 @@
               role="menuitem"
               tabindex="-1"
               id="menu-item-0"
+              on:click={openEditModal}
             >
               Edit
             </button>
@@ -116,7 +132,7 @@
               role="menuitem"
               tabindex="-1"
               id="menu-item-1"
-              on:click={() => (deleteModal = true)}
+              on:click={openDeleteModal}
             >
               Delete
             </button>
@@ -128,5 +144,12 @@
 </tr>
 
 {#if deleteModal === true}
-  <DeleteModal on:delete={handleDelete} />
+  <DeleteModal
+    on:delete={handleDelete}
+    on:close={() => (deleteModal = false)}
+  />
+{/if}
+
+{#if editExpense === true}
+  <EditExpense {item} {itemId} on:close={() => (editExpense = false)} />
 {/if}
