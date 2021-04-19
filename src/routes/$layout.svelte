@@ -8,6 +8,8 @@
   import Loading from "$lib/components/loading.svelte";
   import TopBar from "$lib/components/topBar.svelte";
 
+  let sidebarOpen: boolean = false;
+
   if (browser) {
     // @ts-ignore
     const userbase = window.userbase;
@@ -40,10 +42,10 @@
   <Auth />
 {:else}
   <div class="h-screen flex overflow-hidden bg-gray-100">
-    <Nav />
+    <Nav {sidebarOpen} on:close={() => (sidebarOpen = false)} />
     <div class="flex-1 overflow-auto focus:outline-none" tabindex="0">
       <main class="flex-1 relative pb-8 z-0 overflow-y-auto">
-        <TopBar />
+        <TopBar on:open={() => (sidebarOpen = true)} />
         <slot />
       </main>
     </div>

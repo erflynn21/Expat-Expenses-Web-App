@@ -1,7 +1,7 @@
 <script lang="ts">
   import Expense from "$lib/components/expense.svelte";
   import { baseCurrencySymbol } from "$lib/stores/currenciesStore";
-  import { expenses } from "$lib/stores/expensesStore";
+  import { expenses, expensesSum } from "$lib/stores/expensesStore";
   import { incomes } from "$lib/stores/incomesStore";
 </script>
 
@@ -10,6 +10,12 @@
 >
   Transactions
 </h2>
+<h3
+  class="max-w-6xl mx-auto px-4 text-md leading-6 font-light text-gray-900 sm:px-6 lg:px-8"
+>
+  Total Expenses: {$expensesSum}
+</h3>
+
 <!-- expenses -->
 <!-- Activity list (smallest breakpoint only) -->
 <div class="shadow sm:hidden">

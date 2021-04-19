@@ -2,6 +2,8 @@
   import { userStore } from "$lib/stores/userStore";
   import { signOut } from "$lib/ts/auth";
   import AddExpense from "./addExpense.svelte";
+  import { createEventDispatcher } from "svelte";
+  const dispatch = createEventDispatcher();
 
   let profileDropdownOpen: boolean = false;
   let addModal: boolean = false;
@@ -15,8 +17,30 @@
 <div class="bg-white shadow">
   <div class="px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
     <div
-      class="py-6 md:flex md:items-center md:justify-between lg:border-t lg:border-gray-200"
+      class="py-4 md:flex md:items-center md:justify-between lg:border-t lg:border-gray-200"
     >
+      <button
+        class=" text-gray-400 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-500 lg:hidden"
+        on:click={() => dispatch("open")}
+      >
+        <span class="sr-only">Open sidebar</span>
+        <!-- Heroicon name: outline/menu-alt-1 -->
+        <svg
+          class="h-6 w-6"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h8m-8 6h16"
+          />
+        </svg>
+      </button>
       <div class="mt-6 flex space-x-3 md:mt-0">
         <button
           type="button"
